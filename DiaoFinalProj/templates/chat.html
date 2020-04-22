@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+	<h2 style=' color:yellow; text-align: center'> You are in the room: {{ chatroom.chat_name }}</h2>
+	<ul id="msgs" class="messages" style='text-align: center'>
+		{% for message in messages %}
+			<li>
+				<p>
+					<strong>{{ message.author }}: </strong><small> - {{ message.pub_date|datetimeformat }}</small>
+				</p>
+				<p style="margin-top: 8px;">
+					{{ message.text }}
+				</p>
+			</li>
+	{% else %}
+		<li><em>No messages so far.</em>
+	{% endfor %}
+	</ul>
+	<div class="chatbox">
+		<h3 style='color: black;
+  text-align: center'>{{ g.user.username }}, What do you want to speak?</h3>
+		<form style='text-align: center'>
+			<input type="hidden" id="author" value="{{ g.user.username }}">
+			<input type="hidden" id="chat_name" value="{{ chatroom.chat_name }}">
+			<input type="text" id="text" size="60">
+			<input id="btn" type="button" value="Send message" style='text-align: center;'>
+		</form>
+	</div>
+{% endblock %}
+{% block js %}
+	<script type="text/javascript" src="{{ url_for('static', filename='ajax.js') }}"></script>
+	<script type="text/javascript">
+	</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+<div class="container text-center">
+   
+    <h2 style='text-align: center; color: yellow'>Feel Free to edit your profile! </h2>
+    <h3 style='text-align: left; color: yellow' > UserName: {{user.username}} </h3>
+    <h3 style='text-align: left; color: yellow' > Password: {{user.password}} </h3>
+    <h3 style='text-align: left; color: yellow' > First Name: {{user.first_name}} </h3>
+    <h3 style='text-align: left; color: yellow' > Last Name: {{user.last_name}} </h3>
+
+    <form method = "POST">
+        <dl style= 'text-align: center;color: yellow'>
+            <dt> Username:
+            <dd><input type="text" name="username" size="30" value="{{ request.form.username }}">
+            <dt>Password:
+            <dd><input type="password" name="password" size="30">
+            <dt>Repeat your Password:
+            <dd><input type="password" name="password2" size="30">
+            <dt> First Name:
+            <dd><input type="text" name="first_name" size="30" value="{{ request.form.first_name }}">
+            <dt> Last Name:
+            <dd><input type="text" name="last_name" size="30" value="{{ request.form.last_name }}">
+        </dl> 
+        <div class="actions" style='text-align: center; color: white;'><input type="submit" value="Apply Changes"></div>
+        
+    </form> 
+
+
+{% endblock %}

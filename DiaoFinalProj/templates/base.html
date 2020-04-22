@@ -1,0 +1,45 @@
+<!doctype html>
+<title>{% block title %}Welcome{% endblock %} | Introvert project</title>
+<meta view-po>
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+
+<div class="navigation">
+  <div class="name">Introvert</div>
+  <div class="hrefs">
+    {% if g.user %}
+      <a href="{{ url_for('view_friend_requests') }}">Friend Requests</a>
+      <a href="{{ url_for('view_friends_list') }}">View Friends</a>
+      <a href="{{ url_for('profile') }}">Profile</a>
+      {% if g.user.current_room_id != -1 %}
+        <a href="{{ url_for('index') }}">Quit</a>
+      {% else %}
+        <a href="{{ url_for('index') }}">Index</a>
+      {% endif%}
+      <a href="{{ url_for('logout') }}">Sign Out</a>
+      <a href="{{ url_for('space') }}">{{ g.user.username }}</a>
+    {% else %}
+      <a href="{{ url_for('index') }}">Index</a>
+      <a href="{{ url_for('register') }}">Registration</a>
+      <a href="{{ url_for('login') }}">Sign In</a>
+    {% endif %}
+  </div>
+</div>
+
+{% with flashes = get_flashed_messages() %}
+  {% if flashes %}
+    <ul class="flashes">
+    {% for message in flashes %}
+      <li>{{ message }}
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<div class="body">
+  {% block body %}{% endblock %}
+</div>
+
+<div class="footer">Copyright © 2020 | Designed & Developed Introvert</div>
+
+{% block js %}{% endblock %}

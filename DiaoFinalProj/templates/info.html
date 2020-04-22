@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+	<h2 style=' color:yellow; text-align: center'>Self Space</h2>
+	<table class="space" width="480">
+    <tr>
+        <td width="180" align="center" height="60">ID:</td>
+        <td width="300" align="left">{{ g.user.user_id }}</td>
+      </tr>
+    <tr>
+      <td width="180" align="center" height="60">Username:</td>
+      <td width="300" align="left">{{ g.user.username }}</td>
+    </tr>
+    <tr>
+      <td width="180" align="center" height="60">Current Room ID:</td>
+      <td width="300" align="left">{{ g.user.current_room_id }}</td>
+    </tr>
+    <tr>
+      <td width="180" align="center" height="60">Password:</td>
+      <td width="300" align="left">{{ g.user.password }}</td>
+    </tr>
+    <tr>
+        <td width="180" align="center">Sign:</td>
+        <td width="300" height="200" align="left">
+          <textarea name="sign" id="sign" cols="60" rows="10"></textarea>
+          <input type="button" class="submit" value="Update" onclick="update_sign()" />
+        </td>
+    </tr>
+  </table>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+var sign = window.localStorage.getItem('{{ g.user.username }}_sign');
+if (sign) {
+  document.getElementById('sign').value = sign;
+} else {
+  document.getElementById('sign').value = 'Not setted yet.';
+}
+
+function update_sign() {
+  var sign = document.getElementById('sign').value;
+  window.localStorage.setItem('{{ g.user.username }}_sign', sign);
+}
+</script>
+{% endblock %}

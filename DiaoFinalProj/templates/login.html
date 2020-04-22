@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block body %}
+  <div class="container">
+    <h2 style='text-align: center;color: yellow'>Sign In</h2>
+    {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+    <form action="" method="post">
+        <table width="460" class="table">
+          <tr>
+            <td align="right" width="180">Username:</td>
+            <td align="left" width="260">
+              <input type="text" name="username" size="30" value="{{ request.form.username }}" class="input" placeholder="Username" />
+            </td>
+          </tr>
+          <tr>
+            <td align="right" width="180">Password:</td>
+            <td align="left" width="260">
+              <input type="password" name="password" size="30" class="input" placeholder="Username" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <input type="submit" value="Sign In" class="submit" />
+            </td>
+          </tr>
+        </table>
+    </form>
+  </div>
+{% endblock %}

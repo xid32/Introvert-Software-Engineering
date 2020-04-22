@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+{% extends "base.html" %}
+{% block body %}
+
+	<head>
+		<meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
+		<title> titleeeee </title>
+		<link rel = "stylesheet" type = "text/css" href = "style.css">
+	</head>
+
+
+	{% if g.user %}
+		<h4 style='text-align: center;color: yellow'> ____ ____ ____ ____ _____</h4>
+		<style>
+			input[type=button], input[type=submit], input[type=reset] {
+			  background-color: lightgreen;
+			  border: none;
+			  color: darkgreen;
+			  padding: 10px 94px;
+			  text-decoration: none;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			  text-align: center;
+			}
+
+			input[type="text"], textarea {
+			  background-color : pink; 
+			}
+		</style>
+
+		<h3 style='text-align: center;color: yellow'> View Friends</h3>
+
+		<div class="twitbox">
+			
+<!-- 
+			<form action="{{ url_for('accept_friend_request') }}" method="post">
+				<input type="hidden" name="creator_id" value="{{ g.user.user_id }}">
+				<dl>
+					<dt>Accept all friend requests
+      			</dl>
+				  <div class="actions" style='text-align: center'><input type="submit" value="Accept"></div>
+			</form> -->
+
+--------------------------------------------------------------------------------------
+
+			<div id = 'friend_list_view' style="overflow-y: scroll; height:400px;">
+
+				<ul id="friends" class="all_friends" style='text-align: center'>
+					<h1>
+						Friends list
+					</h1>
+					{% for frd in all_friends %}
+						
+					<div id="title_down">
+						<div class="container">
+							
+							<div class="row">
+
+								<div class = "column left" style="background-color:#ffffff;">
+									<p> 
+										<font color = "black">
+											<strong> 1) {{ frd.user1 }}</strong>
+										</font>
+									</p>
+								</div>
+				
+								<div class = "column right" style="background-color:#ffffff;"> 
+									<p>
+											<form action="{{ url_for('remove_friend') }}" method="post">
+												<input type="hidden" name="current_user" value="{{ g.user.user_id }}">
+												<input type="hidden" name="friend_of_current_user" value="{{ frd.user1 }}">
+												<div class="actions" style='text-align: center'><input type="submit" value="Delete"></div>
+											</form>
+
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+						{% else %}
+							<li><em>You have no friends. Go on twitter.</em></li>
+							
+					{% endfor %}
+				</ul>
+			</div>
+
+
+	{% else %}
+		<h2 style ="color: yellow;
+	  		text-align: center";>cool
+	  	</h2>
+	  	<ul style ="color: yellow;";>
+		<li>Say something</li>
+		</ul>
+	{% endif %}
+{% endblock %}
+
+
+</html>

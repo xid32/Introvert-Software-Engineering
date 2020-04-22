@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block body %}
+	<h2 style=' color:yellow; text-align: center'> You are talking with {{ tousername }}</h2>
+	<ul id="msgs" class="messages" style='text-align: center'>
+		{% for message in messages %}
+			{% if message.text == 'image' %}
+				<li>
+					<p>
+						<strong>{{ message.fromuser }} said </strong>
+						<strong>to {{ message.touser }}: </strong> 
+						<small> - {{ message.pub_date|datetimeformat }}</small>
+						<img src="data:;base64,{{ message.image }}" />
+			{% else %}
+				<li>
+					<p>
+						<strong>{{ message.fromuser }} said</strong>
+						<strong> to {{ message.touser }}: </strong> 
+						<small> - {{ message.pub_date|datetimeformat }}</small>
+						<p style="margin-top: 8px;">
+							{{ message.text }}	
+						</p>
+			{% endif %}
+	{% else %}
+		<li><em>No messages between you so far.</em>
+	{% endfor %}
+	</ul>
+	<div class="chatbox">
+		<h3 style='color: black;
+  text-align: center'>{{ g.user.username }}, Talk to your friend!</h3>
+		<form style='text-align: center'>
+			<input type="hidden" id="fromuser" value="{{ g.user.username }}">
+			<input type="hidden" id="touser" value="{{ tousername }}">
+			<input type="text" id="text" size="20">
+			<input id="sendbtn" type="button" value="Send message" style='text-align: center;'>
+		</form>
+		<form style='text-align: center' enctype="multipart/form-data" id="img-form">
+			<input type="hidden" name="fromuser" id="fromuser" value="{{ g.user.username }}">
+			<input type="hidden" name="touser" id="touser" value="{{ tousername }}">
+			<input type="file" id="fileimage" name="file" style="margin-top:20px;"/>
+			<input id="sendimgebtn" type="button" value="Send Image" style='text-align: center;'>
+		</form>
+	</div>
+{% endblock %}
+{% block js %}
+	<script type="text/javascript" src="{{ url_for('static', filename='sendMsg.js') }}"></script>
+	<script type="text/javascript">
+	</script>
+{% endblock %}

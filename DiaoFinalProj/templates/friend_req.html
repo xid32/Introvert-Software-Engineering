@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+{% extends "base.html" %}
+{% block body %}
+
+	<head>
+		<meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no, height=1800px">
+		<title>  </title>
+		<link rel = "stylesheet" type = "text/css" href = "style.css">
+	</head>
+
+
+	{% if g.user %}
+		<h4 style='text-align: center;color: yellow'> ____ ____ ____ ____ _____</h4>
+		<style>
+			input[type=button], input[type=submit], input[type=reset] {
+			  background-color: lightgreen;
+			  border: none;
+			  color: darkgreen;
+			  padding: 10px 94px;
+			  text-decoration: none;
+			  margin: 4px 2px;
+			  cursor: pointer;
+			  text-align: center;
+			}
+
+			input[type="text"], textarea {
+			  background-color : pink; 
+			}
+		</style>
+
+		<h3 style='text-align: center;color: yellow'> View Friend Requests</h3>
+
+		<div class="twitbox">
+			
+<!-- 
+			<form action="{{ url_for('accept_friend_request') }}" method="post">
+				<input type="hidden" name="creator_id" value="{{ g.user.user_id }}">
+				<dl>
+					<dt>Accept all friend requests
+      			</dl>
+				  <div class="actions" style='text-align: center'><input type="submit" value="Accept"></div>
+			</form> -->
+
+--------------------------------------------------------------------------------------
+
+			<div id = 'friend_list_view' style="overflow-y: scroll; height:400px;">
+
+				<ul id="friend_req" class="friend_requests" style='text-align: center'>
+					<h1>
+						Friend Requests Pending
+					</h1>
+					{% for req in friend_requests %}
+					
+					<div id="title_down">
+						<div class="container">
+							
+							<div class="row">
+ 
+								<div class = "column left" style="background-color:#ffffff;">
+									<p> 
+										<font color = "black">
+											<strong> User: {{ req.user1 }} sent you a friend request.</strong>
+										</font>
+									</p>
+								</div>
+				
+								<div class = "column right" style="background-color:#ffffff;">
+									<p>
+											<form action="{{ url_for('accept_friend_request') }}" method="post">
+												<input type="hidden" name="receiving_user" value="{{ g.user.user_id }}">
+												<input type="hidden" name="creating_user" value="{{ req.user1 }}">
+												<div class="actions" style='text-align: center'><input type="submit" value="Accept"></div>
+											</form>
+
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+						{% else %}
+							<li><em>No friend requests so far.</em></li>
+							
+					{% endfor %}
+				</ul>
+			</div>
+
+
+
+
+
+
+
+	{% else %}
+		<h2 style ="color: yellow;
+	  		text-align: center";>cool
+	  	</h2>
+	  	<ul style ="color: yellow;";>
+		<li>Say something</li>
+		</ul>
+	{% endif %}
+{% endblock %}
+
+
+</html>

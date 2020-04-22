@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Registration{% endblock %}
+{% block body %}
+  <div class="container">
+    <h2>Registration</h2>
+    {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
+    <form action="" method="post">
+      <table width="460" class="table">
+        <tr>
+          <td align="right" width="180">Username:</td>
+          <td align="left" width="260">
+            <input type="text" name="username" size="30" value="{{ request.form.username }}" class="input" placeholder="Username" />
+          </td>
+        </tr>
+        <tr>
+          <td align="right">Password:</td>
+          <td align="left">
+            <input type="password" name="password" size="30" class="input" placeholder="Password" />
+          </td>
+        </tr>
+        <tr>
+          <td align="right">Repeat your password:</td>
+          <td align="left">
+            <input type="password" name="password2" size="30" class="input" placeholder="Repeat your password" />
+          </td>
+        </tr>
+
+        <tr>
+          <td align="right">First Name:</td>
+          <td align="left">
+            <input type="text" name="first_name" size="30" class="input" value="{{ request.form.first_name }}" placeholder="First Name">
+          </td>
+        </tr>
+        
+        <tr>
+          <td align="right">Last Name:</td>
+          <td align="left">
+            <input type="text" name="last_name" size="30" class="input" value="{{ request.form.last_name }}" placeholder="Last Name">
+          </td>
+        </tr>
+
+
+
+
+        <tr>
+          <td colspan="2" align="center">
+            <input type="submit" value="Register" class="submit">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+{% endblock %}
